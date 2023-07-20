@@ -2,13 +2,17 @@
 
 This project illustrates an issue I have seen with OTel context propagation with Pulsar Functions.
 A Pulsar function is essentially composed of a consumer and producer, and OTel does correctly create
-a `receive`, `process` and `send` Span for the function. The trace ID though, is somehow getting dropped/stomped by
-the `process` Span.
+a `receive` and `send` Span for the function. The trace ID though, is somehow getting dropped/stomped
+within the function as the `receive` Span DOES have the OTel context set, but the `send` does not.
+
+As the Pulsar function just uses a pulsar client under the hood, this is unexpected, as pulsar client works
+well re OTel context propagation across "regular" producer/consumer apps.
 
 ## Requirements
 
-Docker
-Maven
+* Docker
+* Maven
+* Java
 
 ## Workflow
 
@@ -19,7 +23,9 @@ Maven
 *
     3. `NewMessageFunction`      PUBLISHES_TO    `persistent://public/default/otel-feed`
 
-## Startup:
+## Steps to recreate
+
+### 1. Startup Pulsar Broker & Function
 
 ```shell 
 mvn clean install
@@ -29,12 +35,13 @@ sleep 10
 ./create-pulsar-components.sh
 ```
 
-## Publish message and view trace IDs:
+### 2. Publish message
 
 ```shell 
 ./publish-message.sh
 ```
 
+### 3. View trace IDs
 The hard-coded initial messages traceId of `0bf7651916cd43dd8448eb211c80319c` DOES get propagated/extracted by the
 function and we see something like this for the receive Span:
 
