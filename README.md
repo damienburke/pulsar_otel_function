@@ -3,7 +3,7 @@
 This project illustrates an issue I have seen with OTel context propagation with Pulsar Functions.
 A Pulsar function is essentially composed of a consumer and producer, and OTel does correctly create
 a `receive` and `send` Span for the function. The trace ID though, is somehow getting dropped/stomped
-within the function as the `receive` Span DOES have the OTel context set, but the `send` does not.
+within the function as the `receive` Span DOES have the OTel context set, but the `send` DOES NOT.
 
 As the Pulsar function just uses a pulsar client under the hood, this is unexpected, as pulsar client works
 well re OTel context propagation across "regular" producer/consumer apps.
