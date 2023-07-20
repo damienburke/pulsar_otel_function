@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#mvn clean install
+mvn clean install
 
 docker exec -it pulsar-broker /pulsar/bin/pulsar-admin clusters list
 

@@ -8,6 +8,9 @@ within the function as the `receive` Span DOES have the OTel context set, but th
 As the Pulsar function just uses a pulsar client under the hood, this is unexpected, as pulsar client works
 well re OTel context propagation across "regular" producer/consumer apps.
 
+There is no OTel collector setup, and any collector errors can be ignored. OTel logging is switched on to allow the 
+Spans and trace IDs be inspected, etc.
+
 ## Requirements
 
 * Docker
