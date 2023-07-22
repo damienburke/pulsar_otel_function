@@ -15,7 +15,7 @@ services:
     volumes:
       - pulsar-data-volume:/pulsar/data
       - ./broker/conf/functions_worker.yml:/pulsar/conf/functions_worker.yml
-      - ./target/opentelemetry-javaagent.jar:/pulsar/otel/opentelemetry-javaagent.jar
+      - ./otelagent/target/opentelemetry-javaagent.jar:/pulsar/otel/opentelemetry-javaagent.jar
       - ./target/pulsar_otel_function-0.0.1-SNAPSHOT.jar:/pulsar/conf/pulsar_otel_function-0.0.1-SNAPSHOT.jar
 
     command: bin/pulsar standalone

@@ -7,4 +7,3 @@ docker exec -it pulsar-broker /pulsar/bin/pulsar-client produce \
   --messages "Hello Traces"
 
 docker logs pulsar-broker | grep "*io.opentelemetry.exporter.logging.LoggingSpanExporter"
-

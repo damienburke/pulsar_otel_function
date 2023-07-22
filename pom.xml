@@ -14,11 +14,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.8.22</kotlin.version>
-        <opentelemetry-api.version>1.28.0</opentelemetry-api.version>
         <kotlin.code.style>official</kotlin.code.style>
         <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
         <pulsar.version>2.11.1</pulsar.version>
-        <opentelemetry-javaagent.version>1.28.0</opentelemetry-javaagent.version>
     </properties>
 
     <dependencies>
@@ -55,37 +53,6 @@
                         <goals>
                             <goal>test-compile</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Extract the OTel agent jar from the zip file provided from the repository -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-otel</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>io.opentelemetry.javaagent</groupId>
-                                    <artifactId>opentelemetry-javaagent</artifactId>
-                                    <version>${opentelemetry-javaagent.version}</version>
-                                    <type>jar</type>
-                                    <overWrite>true</overWrite>
-                                    <!-- rename the Jar so it doesn't have the otel version num -->
-                                    <destFileName>opentelemetry-javaagent.jar</destFileName>
-                                    <outputDirectory>${project.build.directory}/</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                            <overWriteReleases>true</overWriteReleases>
-                            <overWriteSnapshots>true</overWriteSnapshots>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
