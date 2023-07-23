@@ -31,10 +31,6 @@ Spans and trace IDs be inspected, etc.
 ### 1. Configure & Startup Pulsar Broker & (auto-instrumented) Function
 
 ```shell 
-# build the pulsar function
-mvn clean install
-# build the otel agent, to be used by the pulsar broker
-mvn clean install -f ./otelagent/pom.xml
 # start the broker
 docker compose down --volumes
 docker compose up &

@@ -8,14 +8,11 @@ services:
       - OTEL_JAVAAGENT_ENABLED=true
       - OTEL_JAVAAGENT_LOGGING=simple
       - OTEL_JAVAAGENT_DEBUG=true
-      - OTEL_SERVICE_NAME=myfunctionx
     ports:
       - 6650:6650
       - 8081:8080
     volumes:
       - pulsar-data-volume:/pulsar/data
-      - ./broker/conf/functions_worker.yml:/pulsar/conf/functions_worker.yml
-      - ./otelagent/target/opentelemetry-javaagent.jar:/pulsar/otel/opentelemetry-javaagent.jar
       - ./target/pulsar_otel_function-0.0.1-SNAPSHOT.jar:/pulsar/conf/pulsar_otel_function-0.0.1-SNAPSHOT.jar
 
     command: bin/pulsar standalone
